@@ -8,7 +8,7 @@ key_file = {
     'test_label': 't10k-labels-idx1-ubyte.gz'
 }
 
-dataset_dir = '/Users/komei0727/workspace/robot_intelligence/data'  # データを保存する場所
+dataset_dir = '/Users/komei0727/workspace/robot_intelligence/data/mnist'  # データを保存する場所
 
 for v in key_file.values():
     file_path = dataset_dir + '/' + v

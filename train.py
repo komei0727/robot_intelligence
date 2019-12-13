@@ -39,13 +39,16 @@ for i in range(len(train_img)):
         if random_number < noise_rate:
             train_img[i][j] = random.random()
 
+# Layer.pyで作成したクラスを呼び出しネットワークを形成
 model = Layer.Sequential()
 model.addlayer(Layer.LinearLayer(784, 1000))
 model.addlayer(Layer.SigmoidLayer())
 model.addlayer(Layer.LinearLayer(1000, 10))
 classifier = Layer.Classfier(model)
 
+# 学習させる
 for i in range(100):
+    # train_imgとtest_imgをランダムに並べ替える
     rand1 = np.arange(60000)
     shuffle(rand1)
     rand2 = np.arange(10000)
@@ -54,10 +57,12 @@ for i in range(100):
     train_label_one_hot = train_label_one_hot[rand1, :]
     test_img = test_img[rand2]
     test_label_one_hot = np.array(test_label_one_hot[rand2, :])
+    # train_imgのうち200個のデータを用いて学習させる
     for j in range(200):
         x = np.array([train_img[j]])
         t = np.array([train_label_one_hot[j]])
         classifier.update(x, t)
+    # test_imgのうち100個のデータを用いて精度を調べる
     count = 0
     for j in range(100):
         x = np.array([test_img[j]])
